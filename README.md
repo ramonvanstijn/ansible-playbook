@@ -29,14 +29,22 @@ remote_user = admin
 private_key_file = /ssh_key
 ```
 
-That is bit of typing every time you want to run a playbook, bash users can add a function to `~/.bashrc` that minimizes the typing. Copy the command below and paste it on the command line to append the function to `/.bashrc`.
+That is bit of typing every time you want to run a playbook, bash users can add a function to `~/.bashrc` that minimizes the typing.
+
+First set the private_key_file variable:
+
+```shell
+private_key_file=~/.ssh/id_ansible
+```
+
+Second, copy and paste this command to append the function to /.bashrc.
 
 ```shell
 cat >> ~/.bashrc << EOF
 
 function ansible-playbook {
   docker container run --rm -it \\
-    -v ~/.ssh/your_private_key:/ssh_key \\
+    -v ${private_key_file}:/ssh_key \\
     -v \$(pwd):/playbook \\
     ansible-playbook:2.6.3 "\$@"
 }
