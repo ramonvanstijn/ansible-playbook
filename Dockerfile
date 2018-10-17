@@ -7,7 +7,7 @@ RUN addgroup -g 1970 ansible \
 
 RUN apk upgrade --no-cache \
     && apk add --update --no-cache \
-        ansible=2.6.3-r0 \
+        ansible=2.7.0-r0 \
         openssh-client \
         sshpass
 

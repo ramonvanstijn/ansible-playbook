@@ -7,7 +7,7 @@ Example build:
 ```shell
 git clone https://github.com/ramonvanstijn/ansible-playbook.git
 cd ansible-playbook
-docker image build --rm -t ansible-playbook:2.6.3 .
+docker image build --rm -t ansible-playbook:2.7.0 .
 ```
 
 Before running a container it is required to set up the remote user and private key file, use environment variables or set them in `ansible.cfg`.
@@ -19,7 +19,7 @@ cd /path/to/playbook_project
 docker container run --rm -it \
   -v ~/.ssh/your_private_key:/ssh_key \
   -v $(pwd):/playbook \
-  ansible-playbook:2.6.3 your_playbook.yaml
+  ansible-playbook:2.7.0 your_playbook.yaml
 ```
 
 For this example remote_user and private_key_file are set in `ansible.cfg` which is located in the playbook project directory
@@ -29,7 +29,7 @@ remote_user = admin
 private_key_file = /ssh_key
 ```
 
-That is bit of typing every time you want to run a playbook, bash users can add a function to `~/.bashrc` that minimizes the typing.
+That is a bit of typing every time you want to run a playbook, bash users can add a function to `~/.bashrc` that minimizes the typing.
 
 First set the private_key_file variable:
 
@@ -46,7 +46,7 @@ function ansible-playbook {
   docker container run --rm -it \\
     -v ${private_key_file}:/ssh_key \\
     -v \$(pwd):/playbook \\
-    ansible-playbook:2.6.3 "\$@"
+    ansible-playbook:2.7.0 "\$@"
 }
 EOF
 ```
