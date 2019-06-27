@@ -7,12 +7,9 @@ RUN addgroup -g 1970 ansible \
 
 RUN apk upgrade --no-cache \
     && apk add --update --no-cache \
-        git \
         ansible=2.8.1-r0 \
         openssh-client \
         sshpass
-
-RUN pip3 install docker
 
 WORKDIR /playbook
 
