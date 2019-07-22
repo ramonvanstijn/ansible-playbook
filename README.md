@@ -5,9 +5,10 @@ Yet another ansible-playbook Dockerfile, I know. This one will build an image ba
 Example build:
 
 ```shell
-git clone https://github.com/ramonvanstijn/ansible-playbook.git
-cd ansible-playbook
-docker image build --rm -t ansible-playbook:2.8.1 .
+docker image build --rm \
+  --build-arg version=2.8.2-r0 \
+  -t ansible-playbook:2.8.2 \
+  https://github.com/ramonvanstijn/ansible-playbook.git
 ```
 
 Before running a container it is required to set up the remote user and private key file, use environment variables or set them in `ansible.cfg`.
@@ -18,8 +19,8 @@ Example usage:
 cd /path/to/playbook_project
 docker container run --rm -it \
   -v ~/.ssh/your_private_key:/ssh_key \
-  -v $(pwd):/playbook \
-  ansible-playbook:2.8.1 your_playbook.yaml
+  -v /path/to/playbook_project:/playbook \
+  ansible-playbook:2.8.2 your_playbook.yaml
 ```
 
 For this example remote_user and private_key_file are set in `ansible.cfg` which is located in the playbook project directory
@@ -37,7 +38,7 @@ First set the private_key_file variable:
 private_key_file=~/.ssh/id_ansible
 ```
 
-Second, copy and paste this command to append the function to /.bashrc.
+Second, copy and paste this command to append the function to `~/.bashrc`.
 
 ```shell
 cat >> ~/.bashrc << EOF
@@ -46,7 +47,7 @@ function ansible-playbook {
   docker container run --rm -it \\
     -v ${private_key_file}:/ssh_key \\
     -v \$(pwd):/playbook \\
-    ansible-playbook:2.8.1 "\$@"
+    ansible-playbook:2.8.2 "\$@"
 }
 EOF
 ```
