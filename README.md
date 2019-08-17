@@ -6,8 +6,8 @@ Example build:
 
 ```shell
 docker image build --rm \
-  --build-arg version=2.8.2-r0 \
-  -t ansible-playbook:2.8.2 \
+  --build-arg version=2.8.3 \
+  -t ansible-playbook:2.8.3 \
   https://github.com/ramonvanstijn/ansible-playbook.git
 ```
 
@@ -20,7 +20,7 @@ cd /path/to/playbook_project
 docker container run --rm -it \
   -v ~/.ssh/your_private_key:/ssh_key \
   -v /path/to/playbook_project:/playbook \
-  ansible-playbook:2.8.2 your_playbook.yaml
+  ansible-playbook:2.8.3 your_playbook.yaml
 ```
 
 For this example remote_user and private_key_file are set in `ansible.cfg` which is located in the playbook project directory
@@ -47,7 +47,7 @@ function ansible-playbook {
   docker container run --rm -it \\
     -v ${private_key_file}:/ssh_key \\
     -v \$(pwd):/playbook \\
-    ansible-playbook:2.8.2 "\$@"
+    ansible-playbook:2.8.3 "\$@"
 }
 EOF
 ```
