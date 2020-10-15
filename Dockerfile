@@ -2,7 +2,7 @@ FROM alpine:edge
 
 LABEL maintainer="Ramon van Stijn <ramons@nl.ibm.com"
 
-ARG version=2.8.5
+ARG version=2.9.13
 
 RUN addgroup -g 1970 ansible \
     && adduser -u 1970 -G ansible -s /bin/sh -D ansible
@@ -10,6 +10,7 @@ RUN addgroup -g 1970 ansible \
 RUN apk upgrade --no-cache \
     && apk add --no-cache \
         python3 \
+        cmd:pip3 \
         openssh-client \
         sshpass
 
